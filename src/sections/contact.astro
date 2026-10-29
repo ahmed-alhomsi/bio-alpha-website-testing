@@ -1,0 +1,28 @@
+---
+import contactImage from "../assets/images/contact-home.png";
+import AppButton from "../components/AppButton.astro";
+import roundImage from "../assets/images/round.png";
+---
+
+<section
+  class="m-auto xl:mb-24 relative flex lg:flex-row flex-col justify-center items-center lg:max-w-7xl w-full gap-12 xl:rounded-3xl rounded-none bg-primary-orange p-8"
+>
+  <img src={roundImage.src} class="w-28 top-0 absolute right-0" alt="round" />
+  <img src={roundImage.src} class="w-28 bottom-0 absolute left-0" alt="round" />
+
+  <img src={contactImage.src} alt="Contact" class="lg:w-[40%] z-50 w-[90%]" />
+
+  <div class="md:w-[60%] relative w-[90%]">
+    <h1 class="text-4xl font-bold mb-4">Get in Touch</h1>
+    <p class="text-secondary-black font-medium mb-8">
+      We're here to help you find the right products and support for your
+      practice. Get in touch and our team will respond within one business day.
+    </p>
+    <AppButton
+      href="/contact"
+      text="Contact us"
+      textColor="text-bg"
+      bgColor="bg-primary-black"
+    />
+  </div>
+</section>

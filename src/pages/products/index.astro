@@ -1,0 +1,109 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import aesthefillImage from "../../assets/images/aesthefill-home.png";
+import powerfillImage from "../../assets/images/powerfill-home.png";
+import juvegelImage from "../../assets/images/juvegel-home.png";
+import AppButton from "../../components/AppButton.astro";
+import Reveal from "../../components/Reveal.astro";
+import bg from "../../assets/images/lab-bg.png";
+
+const productsList = [
+  {
+    name: "AestheFill",
+    description:
+      "AestheFill® is a collagen-stimulating injectable from REGEN Biotech, made from biodegradable PDLLA microspheres. It works by prompting the body to produce its own collagen, which gradually restores facial volume and improves skin quality, addressing age-related volume loss, wrinkles, and folds.",
+    image: aesthefillImage,
+    color: "aesthefill",
+    hoverClass: "group-hover:text-aesthefill",
+  },
+  {
+    name: "PowerFill",
+    description:
+      "PowerFill® is a REGEN Biotech PDLLA injectable for body contouring, including buttock augmentation. It fills for immediate volume while stimulating natural collagen, which helps maintain results as the particles break down. Suitability is determined by clinical assessment.",
+    image: powerfillImage,
+    color: "powerfill",
+    hoverClass: "group-hover:text-powerfill",
+  },
+  {
+    name: "Juvegel",
+    description:
+      "JUVEGEL is a dermal filler range combining crosslinked hyaluronic acid with salmon-derived polynucleotides to add soft-tissue volume and soften nasolabial folds. It comes in Fine, Classic 01, and Volume formulations, each in a 1.0 mL pre-filled syringe, allowing practitioners to personalize treatment.",
+    image: juvegelImage,
+    color: "juvegel",
+    hoverClass: "group-hover:text-juvegel",
+  },
+];
+---
+
+<Layout title="Products | Bio Alpha">
+  <div
+    class="w-full bg-cover bg-center bg-fixed px-8 pt-24 pb-8 lg:mt-12"
+    style={`background-image: url("${bg.src}")`}
+  >
+    <div class="mx-auto max-w-368">
+      <Reveal delay={150} animation="zoom-out">
+        <h1
+          class="m-auto w-full text-center text-4xl lg:mt-0 mt-8 font-bold md:w-[80%] md:text-5xl"
+        >
+          Advanced Solutions
+          <br />
+          for Modern <span class="text-primary-orange">Aesthetics</span>
+        </h1>
+      </Reveal>
+      <Reveal delay={300}>
+        <p
+          class="m-auto mb-8 mt-4 w-full text-center text-secondary-black md:w-[70%]"
+        >
+          We offer advanced collagen-stimulating and hydrating injectables
+          designed to restore volume, renew skin and enhance natural beauty.
+        </p>
+      </Reveal>
+      <div class="m-auto w-full lg:w-[70%]">
+        {
+          productsList.map((product, ind) => (
+            <Reveal delay={200 * ind} animation="fade-right">
+              <a href={`/products/${product.name.toLocaleLowerCase()}`}>
+                <div
+                  class={`group relative mb-12 flex overflow-hidden rounded-2xl bg-${product.color} transition-all duration-300 hover:-translate-y-2 hover:bg-white hover:shadow-lg lg:flex-row flex-col-reverse`}
+                >
+                  <div class="w-full p-8 lg:w-[60%]">
+                    <div class="flex h-full flex-col justify-between">
+                      <div>
+                        <h2
+                          class={`mb-2 text-3xl font-bold transition-all text-white text-w duration-300 group-hover:translate-x-2 ${product.hoverClass} lg:text-4xl`}
+                        >
+                          {product.name}
+                        </h2>
+                        <p class="font-medium text-offwhite group-hover:text-secondary-black group-hover:opacity-90">
+                          {product.description}
+                        </p>
+                      </div>
+                      <AppButton
+                        className="mt-6 lg:mt-0"
+                        bgColor="bg-offwhite"
+                        textColor={`text-${product.color}`}
+                        text={`Explore ${product.name}`}
+                        width="w-54"
+                      />
+                    </div>
+                    <div
+                      class={`absolute bottom-0 right-0 h-1 w-0 bg-${product.color} transition-all duration-500 group-hover:w-full`}
+                    />
+                  </div>
+                  <div class="relative w-full overflow-hidden lg:w-[42%]">
+                    <img
+                      src={product.image.src}
+                      alt={product.name}
+                      class="w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-110"
+                    />
+                    <div class="pointer-events-none absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  </div>
+                </div>
+              </a>
+            </Reveal>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

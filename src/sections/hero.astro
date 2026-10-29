@@ -1,0 +1,264 @@
+---
+import AppButton from "../components/AppButton.astro";
+import aesthefillHero from "../assets/images/aesthefill-hero-1.png";
+import powerfillHero from "../assets/images/powerfill-hero-1.png";
+import juvegelHero from "../assets/images/juvegel-hero.png";
+import Reveal from "../components/Reveal.astro";
+
+const slides = [aesthefillHero, powerfillHero, juvegelHero];
+
+const controlGroups = [
+  "z-30 m-auto mt-4 flex items-center gap-2 px-6 pb-8 sm:px-10 lg:hidden",
+  "z-30 hidden items-center gap-2 lg:absolute lg:bottom-8 lg:left-1/2 lg:flex lg:-translate-x-1/2",
+];
+
+const arrowClass =
+  "grid size-10 place-items-center rounded-full border border-primary-black/30 text-primary-black transition-colors hover:bg-primary-black hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-orange";
+const dotClass =
+  "grid size-10 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-orange";
+---
+
+<section
+  data-hero-slider
+  class="relative isolate flex w-full flex-col-reverse overflow-hidden bg-bg lg:min-h-svh lg:justify-center"
+>
+  {
+    controlGroups.map((groupClass) => (
+      <div
+        class={groupClass}
+        role="group"
+        aria-label="Hero slides"
+        data-hero-group
+      >
+        <button
+          type="button"
+          class={arrowClass}
+          data-hero-prev
+          aria-label="Previous slide"
+        >
+          <svg
+            class="size-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+
+        <div class="flex items-center">
+          {slides.map((_, index) => (
+            <button
+              type="button"
+              class={dotClass}
+              data-hero-control
+              aria-label={`Show slide ${index + 1}`}
+              aria-current={index === 0 ? "true" : "false"}
+            >
+              <span
+                class={`h-2.5 rounded-full transition-all duration-500 ${index === 0 ? "w-6 bg-primary-black" : "w-2.5 bg-primary-black/35"}`}
+                data-hero-indicator
+              />
+            </button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          class={arrowClass}
+          data-hero-next
+          aria-label="Next slide"
+        >
+          <svg
+            class="size-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+    ))
+  }
+
+  <div
+    class="relative h-[45svh] min-h-64 w-full shrink-0 overflow-hidden lg:absolute lg:inset-0 lg:z-0 lg:h-auto lg:min-h-0"
+    aria-hidden="true"
+  >
+    {
+      slides.map((slide, index) => (
+        <div
+          class="absolute inset-0 will-change-transform"
+          style={`transform: translateX(${index === 0 ? 0 : 100}%)`}
+          data-hero-slide
+        >
+          <img
+            src={slide.src}
+            alt="product slide image"
+            class="absolute inset-0 size-full object-cover object-right lg:inset-auto lg:top-0 lg:right-0 lg:h-full lg:w-auto lg:object-[100%_center]"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <div
+    class="relative z-20 mx-auto mt-24 w-full px-6 py-10 sm:px-10 md:mt-8 lg:px-16 lg:py-0 xl:px-32"
+  >
+    <div class="max-w-xl">
+      <Reveal delay={150} animation="fade-left">
+        <h1 class="mb-4 lg:text-5xl font-bold text-4xl">
+          Refining Beauty, <br /><span class="mt-1 block text-primary-orange"
+            >Naturally</span
+          >
+        </h1>
+      </Reveal>
+      <Reveal delay={300} animation="fade-left">
+        <p class="mb-8 text-xl font-medium text-secondary-black lg:mb-12">
+          We supply advanced injectables to clinics and practitioners, backed by
+          training, logistics and regulatory support at every step.
+        </p>
+      </Reveal>
+      <Reveal delay={500} animation="fade-left">
+        <div class="flex flex-wrap gap-4">
+          <AppButton
+            text="Our products"
+            href="/products"
+            textColor="text-primary-black"
+          />
+          <AppButton
+            text="Contact us"
+            href="/contact"
+            bgColor="bg-transparent"
+            textColor="text-primary-black"
+            border
+            centerText
+          />
+        </div>
+      </Reveal>
+    </div>
+  </div>
+</section>
+
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-hero-slider]")
+    .forEach((slider) => {
+      const slides = Array.from(
+        slider.querySelectorAll<HTMLElement>("[data-hero-slide]"),
+      );
+      const groups = Array.from(
+        slider.querySelectorAll<HTMLElement>("[data-hero-group]"),
+      );
+      const prevButtons = Array.from(
+        slider.querySelectorAll<HTMLElement>("[data-hero-prev]"),
+      );
+      const nextButtons = Array.from(
+        slider.querySelectorAll<HTMLElement>("[data-hero-next]"),
+      );
+      const total = slides.length;
+      const duration = 700;
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
+      let activeIndex = 0;
+      let busy = false;
+      let timer: number | undefined;
+
+      const updateControls = () => {
+        groups.forEach((group) => {
+          const dots = Array.from(
+            group.querySelectorAll<HTMLElement>("[data-hero-control]"),
+          );
+          dots.forEach((dot, index) => {
+            const isActive = index === activeIndex;
+            const indicator = dot.querySelector("[data-hero-indicator]");
+            dot.setAttribute("aria-current", String(isActive));
+            indicator?.classList.toggle("w-6", isActive);
+            indicator?.classList.toggle("w-2.5", !isActive);
+            indicator?.classList.toggle("bg-primary-black", isActive);
+            indicator?.classList.toggle("bg-primary-black/35", !isActive);
+          });
+        });
+      };
+
+      const showSlide = (nextIndex: number, direction: number) => {
+        const target = (nextIndex + total) % total;
+        if (target === activeIndex || busy) return;
+
+        const current = slides[activeIndex];
+        const incoming = slides[target];
+        const transition = reduceMotion.matches
+          ? "none"
+          : `transform ${duration}ms cubic-bezier(0.65, 0, 0.35, 1)`;
+        busy = true;
+
+        slides.forEach((slide) => {
+          if (slide === current) return;
+          slide.style.transition = "none";
+          slide.style.transform = `translateX(${direction * 100}%)`;
+        });
+
+        void incoming.offsetWidth;
+
+        incoming.style.transition = transition;
+        current.style.transition = transition;
+        incoming.style.transform = "translateX(0)";
+        current.style.transform = `translateX(${-direction * 100}%)`;
+
+        activeIndex = target;
+        updateControls();
+
+        window.setTimeout(
+          () => {
+            busy = false;
+          },
+          reduceMotion.matches ? 0 : duration,
+        );
+      };
+
+      const startAutoplay = () => {
+        window.clearInterval(timer);
+        if (total > 1 && !reduceMotion.matches) {
+          timer = window.setInterval(() => showSlide(activeIndex + 1, 1), 5000);
+        }
+      };
+
+      const go = (index: number, direction: number) => {
+        showSlide(index, direction);
+        startAutoplay();
+      };
+
+      prevButtons.forEach((button) =>
+        button.addEventListener("click", () => go(activeIndex - 1, -1)),
+      );
+      nextButtons.forEach((button) =>
+        button.addEventListener("click", () => go(activeIndex + 1, 1)),
+      );
+
+      groups.forEach((group) => {
+        const dots = Array.from(
+          group.querySelectorAll<HTMLElement>("[data-hero-control]"),
+        );
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () =>
+            go(index, index > activeIndex ? 1 : -1),
+          );
+        });
+      });
+
+      // slider.addEventListener('mouseenter', () => window.clearInterval(timer));
+      // slider.addEventListener('mouseleave', startAutoplay);
+
+      startAutoplay();
+    });
+</script>

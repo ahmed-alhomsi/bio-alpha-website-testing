@@ -1,0 +1,70 @@
+---
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+    before: ImageMetadata;
+    after: ImageMetadata;
+    alt: string;
+    color:String;
+    class?: string;
+}
+
+const { before, after, alt, class: className = '',color } = Astro.props;
+---
+
+<div
+    data-ba
+    class:list={['ba relative w-full select-none overflow-hidden rounded-2xl', className]}
+    style={`aspect-ratio: ${before.width} / ${before.height}; --pos: 50%;`}
+>
+    <img
+        src={before.src}
+        alt={`${alt} - before`}
+        class="absolute inset-0 w-full h-full object-cover"
+        draggable="false"
+        loading="lazy"
+    />
+
+    <img
+        src={after.src}
+        alt={`${alt} - after`}
+        class="absolute inset-0 w-full h-full object-cover"
+        style="clip-path: inset(0 0 0 var(--pos));"
+        draggable="false"
+        loading="lazy"
+    />
+
+    <span class={`pointer-events-none absolute left-3 top-3 rounded-full bg-white px-3 py-1 text-sm font-bold text-${color}`}>Before</span>
+    <span class={`pointer-events-none absolute right-3 top-3 rounded-full bg-${color} px-3 py-1 text-sm font-bold text-white`}>After</span>
+
+    <div class="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_6px_rgba(0,0,0,0.4)]" style="left: var(--pos);">
+        <div class="absolute top-1/2 left-1/2 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg">
+            <svg class="size-5 text-aesthefill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 6l-6 6 6 6" />
+                <path d="M15 6l6 6-6 6" />
+            </svg>
+        </div>
+    </div>
+
+    <input
+        type="range"
+        min="0"
+        max="100"
+        step="0.1"
+        value="50"
+        aria-label={`Compare before and after: ${alt}`}
+        class="absolute inset-0 size-full cursor-ew-resize appearance-none opacity-0"
+        style="touch-action: pan-y;"
+    />
+</div>
+
+<script>
+    document.querySelectorAll<HTMLElement>('[data-ba]').forEach((root) => {
+        const input = root.querySelector<HTMLInputElement>('input[type="range"]');
+        if (!input) return;
+
+        const update = () => root.style.setProperty('--pos', `${input.value}%`);
+        input.addEventListener('input', update);
+        update();
+    });
+</script>

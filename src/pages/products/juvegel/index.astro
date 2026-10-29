@@ -1,0 +1,261 @@
+---
+import bg from "../../../assets/images/juvegel-bg.png";
+import documentIcon from "../../../assets/icons/document-white.png";
+import Layout from "../../../layouts/Layout.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import AppButton from "../../../components/AppButton.astro";
+import ProductSpecs from "../../../components/ProductSpecs.astro";
+
+import dangerIcon from "../../../assets/icons/danger.svg";
+import checkIcon from "../../../assets/icons/check.svg";
+import before1 from "../../../assets/images/b&a/juvegel-before-1.png";
+import after1 from "../../../assets/images/b&a/juvegel-after-1.png";
+import before2 from "../../../assets/images/b&a/juvegel-before-2.png";
+import after2 from "../../../assets/images/b&a/juvegel-after-2.png";
+import before3 from "../../../assets/images/b&a/juvegel-before-3.png";
+import after3 from "../../../assets/images/b&a/juvegel-after-3.png";
+import before4 from "../../../assets/images/b&a/juvegel-before-4.png";
+import after4 from "../../../assets/images/b&a/juvegel-after-4.png";
+import before5 from "../../../assets/images/b&a/juvegel-before-5.png";
+import after5 from "../../../assets/images/b&a/juvegel-after-5.png";
+import brochureIcon from "../../../assets/icons/document.svg";
+import brochure from "../../../assets/brochures/Juvegel brochure.pdf";
+import ZoomImage from "../../../components/ZoomImage.astro";
+import BeforeAfterSlider from "../../../components/BeforeAfterSlider.astro";
+
+const productSpecs = [
+  { name: "Classification", value: "Dermal filler" },
+  { name: "Shelf Life", value: "3 years from manufacturing date" },
+  { name: "Packaging", value: "1 mL syringe per box" },
+  { name: "Duration", value: "Effective and safe over 24 weeks" },
+  {
+    name: "Key Components",
+    value: "Hyaluronic Acid (HA), Polynucleotide (PN)",
+  },
+  { name: "Manufacturer", value: "BNC Korea, Inc." },
+];
+
+const results = [
+  { before: before1, after: after1 },
+  { before: before2, after: after2 },
+  { before: before3, after: after3 },
+  { before: before4, after: after4 },
+  { before: before5, after: after5 },
+];
+---
+
+<Layout title="Juvegel | Bio Alpha" navColor="juvegel">
+  <div class="w-full">
+    <div class="w-full flex lg:flex-row flex-col-reverse justify-between">
+      <div
+        class="px-[5vw] lg:mt-12 lg:py-24 py-12 max-w-3xl text-xl animate-hero-delayed"
+      >
+        <div class="">
+          <!-- <Breadcrumb items={[
+        { label: "Home", href: "/" },
+        { label: "Products", href: "/products" },
+        { label: "juvegel" },
+    ]} /> -->
+        </div>
+
+        <!--?xml version="1.0" encoding="UTF-8"?-->
+        <svg
+          id="Layer_1"
+          data-name="Layer 1"
+          class="w-72"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1080 171.65"
+        >
+          <defs>
+            <style>
+              .cls-1 {
+                fill: #31564f;
+              }
+            </style>
+          </defs>
+          <path
+            class="cls-1"
+            d="M148.57,103.33V9.41h38.22v92.52c0,20.97,14.22,31.46,34.49,31.46s34.5-10.49,34.5-31.46V9.41h33.79v93.92c0,39.15-27.5,61.76-70.38,61.76s-70.61-22.61-70.61-61.76"
+          ></path>
+          <polygon
+            class="cls-1"
+            points="305.4 9.41 348.98 9.41 389.99 128.74 390.46 128.74 430.55 9.41 469.7 9.41 411.2 165.09 363.66 165.09 305.4 9.41"
+          ></polygon>
+          <polygon
+            class="cls-1"
+            points="486.23 9.41 594.84 9.41 594.84 39.93 524.45 39.93 524.45 74.95 578.99 74.95 578.99 98.61 524.45 98.61 524.45 134.57 596.94 134.57 596.94 165.09 486.23 165.09 486.23 9.41"
+          ></polygon>
+          <path
+            class="cls-1"
+            d="M729.65,165.09v-28.24h-.23c-4.43,17.68-21.56,28.24-46.5,28.24-43.81,0-76.21-28.24-76.21-75.77,0-50.29,34.49-79.91,81.57-79.91,36.01,0,70.85,22.34,70.85,58.66v3.42h-33.56v-.9c0-20.45-20.52-31.57-35.89-31.57-26.1,0-44.05,18.83-44.05,50.52s18.88,47.99,42.65,47.99c17.25,0,34.49-10.34,34.49-27.56v-3.17h-39.62v-21.36h75.98v79.64h-29.48Z"
+          ></path>
+          <polygon
+            class="cls-1"
+            points="780.56 9.41 889.17 9.41 889.17 39.93 818.78 39.93 818.78 74.95 873.32 74.95 873.32 98.61 818.78 98.61 818.78 134.57 891.26 134.57 891.26 165.09 780.56 165.09 780.56 9.41"
+          ></polygon>
+          <polygon
+            class="cls-1"
+            points="909.43 9.41 947.65 9.41 947.65 132.7 1017.57 132.7 1017.57 162.76 909.43 162.76 909.43 9.41"
+          ></polygon>
+          <path
+            class="cls-1"
+            d="M41.27,85.45v17.88c0,19.34,7.23,31.69,24.01,31.69,14.22,0,24.47-11.65,24.47-36.12V9.41h38.22v85.76c0,46.84-22.37,69.92-61.53,69.92S7.71,143.42,7.71,104.96v-19.51h33.56Z"
+          ></path>
+          <path
+            class="cls-1"
+            d="M1050.09,32.34c3,0,4.05-1.23,4.05-3.62,0-2.21-.92-3.55-4.36-3.55h-4.42v7.18h4.73ZM1040.89,21.12h8.89c5.89,0,8.83,2.76,8.83,6.99,0,2.76-.74,4.6-2.94,5.7v.13c2.27.92,2.94,2.64,2.94,4.84v7.67h-4.48v-7.42c0-1.96-.8-3.01-3.13-3.01h-5.64v10.42h-4.47v-25.33ZM1069.11,34.06c0-13-9.14-21.28-19.44-21.28s-19.38,8.28-19.38,21.28,9.08,21.28,19.38,21.28,19.44-8.28,19.44-21.28M1027.03,34.06c0-14.72,10.55-24.47,22.63-24.47s22.63,9.75,22.63,24.47-10.55,24.47-22.63,24.47-22.63-9.75-22.63-24.47"
+          ></path>
+        </svg>
+        <p class="mt-4 mb-10 text">
+          JUVEGEL is a dermal filler range featuring a patented combination of
+          crosslinked hyaluronic acid (HA) and salmon-derived polynucleotides
+          (PN), designed to enhance soft-tissue volume and improve the
+          appearance of nasolabial folds. Available in Fine, Classic 01, and
+          Volume, each supplied in a 1.0 mL pre-filled syringe. JUVEGEL offers
+          healthcare professionals a range of formulations for personalized
+          treatment planning, supported by clinical evaluation and a commitment
+          to product quality, patient safety, and applicable international
+          quality and regulatory standards.
+        </p>
+        <div class="flex gap-5">
+          <AppButton
+            text="Download Brochure"
+            height="h-16"
+            bgColor="bg-juvegel"
+            width="w-64"
+            href={brochure}
+            download={true}
+            ><icon>
+              <img
+                class="w-6 inline mx-2"
+                src={documentIcon.src}
+                alt="Document Icon"
+              /></icon
+            ></AppButton
+          >
+          <AppButton
+            text="Contact Us"
+            height="h-16"
+            bgColor="bg-white"
+            textColor="text-juvegel"
+            border={true}
+            width="w-64"
+            href="/contact"
+          />
+        </div>
+      </div>
+
+      <img
+        src={bg.src}
+        class="lg:w-[40%] h-fit mt-20 w-full slide-right-left"
+        alt="juvegel Background"
+        class="h-auto max-h-125"
+      />
+    </div>
+    <div class="w-full lg:max-w-7xl m-auto px-8">
+      <div class="w-full lg:px-0 mb-12 m-auto">
+        <ProductSpecs specs={productSpecs} color={"juvegel"} />
+      </div>
+
+      <div
+        class="w-full m-auto bg-white border border-juvegel rounded-2xl p-8 mb-12"
+      >
+        <h2 class="font-bold text-3xl text-juvegel mb-8">Results</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            results.map((result, i) => (
+              <BeforeAfterSlider
+                before={result.before}
+                color={"juvegel"}
+                after={result.after}
+                alt={`Juvegel result, example ${i + 1}`}
+              />
+            ))
+          }
+        </div>
+      </div>
+      <div
+        class="w-full m-auto bg-white border border-juvegel rounded-2xl p-8 mb-12 flex
+    items-center justify-between md:flex-row flex-col-reverse md:gap-0 gap-4"
+      >
+        <div>
+          <p class="font-bold text-xl text-center text-juvegel">
+            Download brochure to view full product details
+          </p>
+          <div class="md:h-14"></div>
+
+          <AppButton
+            bgColor="bg-juvegel"
+            text="Download"
+            className="mt-4 m-auto md:m-0"
+            width="w-54"
+            href={brochure}
+            download={true}
+          />
+        </div>
+        <svg
+          version="1.1"
+          class={`fill-juvegel size-44`}
+          id="_x32_"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 512 512"
+          xml:space="preserve"
+          fill="#000000"
+          ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+            <style type="text/css"></style>
+            <g>
+              <path
+                class="st0"
+                d="M378.41,0H208.294h-13.176l-9.314,9.314L57.017,138.102l-9.315,9.314v13.176v265.513 c0,47.361,38.528,85.896,85.896,85.896H378.41c47.36,0,85.888-38.535,85.888-85.896V85.895C464.298,38.528,425.77,0,378.41,0z M432.494,426.104c0,29.877-24.214,54.092-54.084,54.092H133.598c-29.877,0-54.091-24.215-54.091-54.092V160.591h83.717 c24.884,0,45.07-20.179,45.07-45.07V31.804H378.41c29.87,0,54.084,24.214,54.084,54.091V426.104z"
+              ></path>
+              <rect x="277.446" y="93.17" class="st0" height="89.373"></rect>
+              <rect
+                x="145.175"
+                y="232.592"
+                class="st0"
+                width="221.644"
+                height="25.024"></rect>
+              <rect
+                x="145.175"
+                y="304.09"
+                class="st0"
+                width="221.644"
+                height="25.024"></rect>
+              <rect
+                x="145.175"
+                y="375.588"
+                class="st0"
+                width="221.644"
+                height="25.024"></rect>
+            </g>
+          </g></svg
+        >
+      </div>
+
+      <div
+        class="w-full m-auto bg-primary-black rounded-2xl p-8 mb-12 flex
+    items-center justify-between md:flex-row flex-col md:gap-0 gap-4"
+      >
+        <div>
+          <h1 class="mb-2 text-3xl font-bold text-bg">
+            Want to learn more about Juvegel?
+          </h1>
+          <p class="text-bg opacity-80">
+            We're here to provide help at any time
+          </p>
+        </div>
+        <AppButton
+          text="Contact us"
+          href="/contact"
+          textColor="text-primary-black"
+          bgColor="bg-primary-orange"
+        />
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,128 @@
+---
+interface Props {
+    animation?: 'fade' | 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'zoom-in' | 'zoom-out' | (string & {});
+    delay?: number;
+    duration?: number;
+    stagger?: number;
+    threshold?: number;
+    once?: boolean;
+    as?: string;
+    class?: string;
+    [attr: string]: unknown;
+}
+
+const {
+    animation = 'zoom-out',
+    delay = 0,
+    duration = 800,
+    stagger = 0,
+    threshold = 0.2,
+    once = true,
+    as: Tag = 'div',
+    class: className = '',
+    ...attrs
+} = Astro.props;
+
+const classes = ['reveal', `reveal-${animation}`, stagger > 0 ? 'reveal-group' : '', className]
+    .filter(Boolean)
+    .join(' ');
+
+const style = `--reveal-delay:${delay}ms;--reveal-duration:${duration}ms;`;
+---
+
+<Tag
+    {...attrs}
+    class={classes}
+    style={style}
+    data-reveal
+    data-reveal-delay={delay}
+    data-reveal-stagger={stagger}
+    data-reveal-threshold={threshold}
+    data-reveal-once={String(once)}
+>
+    <slot />
+</Tag>
+
+<style is:global>
+    .reveal-fade { --reveal-from: none; }
+    .reveal-fade-up { --reveal-from: translateY(32px); }
+    .reveal-fade-down { --reveal-from: translateY(-32px); }
+    .reveal-fade-left { --reveal-from: translateX(-48px); }
+    .reveal-fade-right { --reveal-from: translateX(48px); }
+    .reveal-zoom-in { --reveal-from: scale(0.92); }
+    .reveal-zoom-out { --reveal-from: scale(1.08); }
+
+    @media (scripting: enabled) {
+        .reveal:not(.reveal-group),
+        .reveal-group > * {
+            opacity: 0;
+            transform: var(--reveal-from, none);
+            transition:
+                opacity var(--reveal-duration, 800ms) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+                transform var(--reveal-duration, 800ms) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible:not(.reveal-group),
+        .reveal-group.is-visible > * {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .reveal:not(.reveal-group),
+        .reveal-group > * {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+    }
+</style>
+
+<script>
+    const observers = new Map<string, IntersectionObserver>();
+
+    const getObserver = (threshold: number) => {
+        const key = String(threshold);
+        let observer = observers.get(key);
+        if (observer) return observer;
+
+        observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const el = entry.target as HTMLElement;
+                    if (entry.isIntersecting) {
+                        el.classList.add('is-visible');
+                        if (el.dataset.revealOnce !== 'false') observer!.unobserve(el);
+                    } else if (el.dataset.revealOnce === 'false') {
+                        el.classList.remove('is-visible');
+                    }
+                });
+            },
+            { threshold, rootMargin: '0px 0px -40px 0px' }
+        );
+        observers.set(key, observer);
+        return observer;
+    };
+
+    const init = () => {
+        document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal-ready])').forEach((el) => {
+            el.dataset.revealReady = '';
+
+            const delay = Number(el.dataset.revealDelay) || 0;
+            const stagger = Number(el.dataset.revealStagger) || 0;
+            const threshold = Number(el.dataset.revealThreshold) || 0.2;
+
+            if (stagger > 0) {
+                Array.from(el.children).forEach((child, i) => {
+                    (child as HTMLElement).style.setProperty('--reveal-delay', `${delay + i * stagger}ms`);
+                });
+            }
+
+            getObserver(threshold).observe(el);
+        });
+    };
+
+    init();
+    document.addEventListener('astro:page-load', init);
+</script>

@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Manrope";
+  src: url("../assets/fonts/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-primary-black);
+  line-height: 1.5;
+  font-weight: 500;
+  overflow-x: hidden;
+}
+
+.logoBg {
+  background-image: url("../assets/images/logo-white.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.labBg {
+  /* background-image: url("../assets/images/lab-bg.png"); */
+  background-repeat: no-repeat;
+  /* background-position: center; */
+  background-position: fixed;
+
+  background-size: contain;
+}
+#comp-mr99sqxd3 svg [data-color="1"] {
+  fill: #f4f2f2;
+}
+#comp-mr99sqxd3 svg [data-color="2"] {
+  fill: #f9ac6f;
+}
+#comp-mr99sqxd3 svg [data-color="3"] {
+  fill: #332d2a;
+}
+@theme {
+  --color-primary-orange: #faad6f;
+  --color-orange-off: #f8e9dc;
+  --color-primary-black: #332d2a;
+  --color-secondary-black: #494949;
+  --color-bg: #f7f7f7;
+  --color-aesthefill: #946852;
+  --color-juvegel: #28514b;
+  --color-powerfill: #004b7c;
+  --color-offwhite: #f0f0f0;
+
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+.header-width {
+  width: 45rem;
+}
+
+.menu-in {
+  animation: hero-in 0.5s forwards;
+}
+.menu-out {
+  animation: menu-out 0.4s forwards;
+}
+.slider-in {
+  animation: slider-in 0.8s forwards;
+}
+
+@keyframes menu-in {
+  0% {
+    opacity: 0;
+    transform: translateY(2%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.slide-in {
+  animation: slideIn 0.6s forwards;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mascot-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes gentle-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-hero-in {
+  animation: hero-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-hero-delayed {
+  opacity: 0;
+  animation: hero-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.4s;
+}
+
+.animate-mascot-bounce {
+  animation: mascot-bounce 3s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.slide-right-left {
+  opacity: 0;
+  animation: slide-right-left 0.6s forwards;
+}
+@keyframes slide-right-left {
+  from {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-hero-in-1 {
+  opacity: 0;
+
+  animation: hero-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.animate-hero-in-2 {
+  opacity: 0;
+
+  animation: hero-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.3s;
+}
+.animate-hero-in-3 {
+  opacity: 0;
+
+  animation: hero-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-card-in {
+  animation: card-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}

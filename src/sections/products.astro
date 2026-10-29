@@ -1,0 +1,124 @@
+---
+import aesthfill from "../assets/images/aesthefill-home.png";
+import juvegel from "../assets/images/juvegel-home.png";
+import powerfill from "../assets/images/powerfill-home.png";
+import wave from "../assets/images/wave-products.svg";
+import Reveal from "../components/Reveal.astro";
+
+const products = [
+  {
+    name: "Aesthefill",
+    colorClass: "text-aesthefill",
+    hoverClass: "hover:bg-aesthefill",
+    image: aesthfill.src,
+    description:
+      "REGEN Biotech’s PDLLA collagen stimulator that gradually restores facial volume and skin quality.",
+  },
+  {
+    name: "Powerfill",
+    colorClass: "text-powerfill",
+    hoverClass: "hover:bg-powerfill",
+    image: powerfill.src,
+    description:
+      "REGEN Biotech’s PDLLA injectable for body contouring, adding volume while stimulating collagen.",
+  },
+  {
+    name: "Juvegel",
+    colorClass: "text-juvegel",
+    hoverClass: "hover:bg-juvegel",
+    image: juvegel.src,
+    description:
+      "HA and salmon-derived polynucleotide filler for volume and nasolabial folds, available in Fine, Classic 01, and Volume.",
+  },
+];
+---
+
+<section class="w-full pt-18 text-center">
+  <div class="bg-primary-orange lg:px-24 px-8 py-14">
+    <Reveal>
+      <h1 class="text-4xl mb-6 font-bold">
+        Advanced Solutions <br />
+        for Modern
+        <div class="inline-block relative mx-2">
+          <span class="text-white">Aesthetics</span>
+          <div class="w-full h-1 bg-white rotate-1"></div>
+        </div>
+      </h1>
+
+      <p class="text-xl text-secondary-black">
+        We offer advanced collagen-stimulating and hydrating injectables
+        designed to restore volume, renew skin and enhance natural beauty.
+      </p>
+    </Reveal>
+
+    <div class="flex m-auto justify-center items-center mt-4 flex-wrap gap-8">
+      {
+        products.map((product, i) => (
+          <Reveal animation="fade-up" delay={i * 150} threshold={0.4}>
+            <article
+              class={`group relative   flex w-104 flex-col justify-between overflow-hidden rounded-xl bg-white text-start shadow-xl transition-all duration-500 ease-out hover:shadow-2xl   ${product.hoverClass}`}
+            >
+              <div class="relative mb-5 overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  class="w-full h-80 transition-transform duration-700 ease-out motion-safe:group-hover:scale-110 "
+                />
+                <div class="pointer-events-none absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 " />
+              </div>
+
+              <h2
+                class={`px-5 mb-2 text-3xl font-bold transition-transform duration-500 ease-out
+        motion-safe:group-hover:text-white
+        motion-safe:group-hover:translate-x-1 ${product.colorClass}`}
+              >
+                {product.name}
+              </h2>
+
+              <p class="mb-4 h-28 px-5 font-medium motion-safe:group-hover:text-gray-200 text-secondary-black">
+                {product.description}
+              </p>
+
+              <a
+                href={`/products/${product.name.toLowerCase()}`}
+                class={`mx-5 motion-safe:group-hover:text-white mt-4 mb-6 inline-flex w-fit items-center gap-2 font-bold underline decoration-2  underline-offset-4 transition-colors duration-300 group-hover:decoration-current  after:absolute after:inset-0 after:content-[''] ${product.colorClass}`}
+              >
+                Explore {product.name}
+                <svg
+                  class="size-5 transition-transform duration-300 ease-out motion-safe:group-hover:translate-x-2 group-hover:opacity-100 opacity-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </article>
+          </Reveal>
+        ))
+      }
+    </div>
+  </div>
+
+  <img src={wave.src} alt="Wave" class="w-full" />
+</section>
+
+<style>
+  .card-hidden {
+    opacity: 0;
+  }
+  .card-hidden.animate-card-in {
+    animation-delay: var(--delay, 0ms);
+    animation-fill-mode: both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-hidden {
+      opacity: 1;
+    }
+  }
+</style>

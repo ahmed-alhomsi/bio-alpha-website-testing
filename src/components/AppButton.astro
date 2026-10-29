@@ -1,0 +1,89 @@
+---
+import { string, type boolean } from "astro:schema";
+
+interface Props {
+  href?: string;
+  bgColor?: string;
+  textColor?: string;
+  text?: string;
+  isCentered?: boolean;
+  border?: boolean;
+  centerText?: boolean;
+  disabled?: boolean;
+  download?: boolean;
+  className?: string;
+  width?: string;
+  textSize?: string;
+  height?: string;
+  type?: "button" | "submit" | "reset";
+  ariaLabel?: string;
+  rel?: string;
+  target?: string;
+}
+
+const {
+  href,
+  bgColor = "bg-primary-orange",
+  textColor = "text-white",
+  text = "",
+  isCentered = false,
+  border = false,
+  download = false,
+  textSize = "text-sm",
+  centerText = true,
+  disabled = false,
+  className = "",
+  width = "w-44",
+  height = "h-14",
+  type = "button",
+  ariaLabel,
+  rel,
+  target,
+} = Astro.props;
+
+const buttonClass = `group relative ${width} ${height} ${bgColor} ${textColor} rounded-xl flex justify-center items-center gap-3 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.2)] active:scale-[0.95] active:translate-y-0  before:absolute before:inset-0 before:rounded-xl before:border-2 before:border-transparent before:transition-all before:duration-500 hover:before:border-white/20 hover:before:scale-[1.04] ${border ? "border-2 border-current" : ""} ${isCentered ? "m-auto" : ""} ${className}`;
+const labelClass = `relative z-10 ${textColor} font-bold ${textSize} tracking-wide transition-all duration-500 group-hover:tracking-[0.04em] text-center `;
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      rel={rel}
+      target={target}
+      aria-label={ariaLabel}
+      download={download}
+      class={`block ${buttonClass}`}
+    >
+      <span class={labelClass}>
+        {text}
+        <slot />
+      </span>
+      {/* <span
+        class="relative z-10 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-0.5"
+        aria-hidden="true"
+      >
+        <slot name="icon" />
+      </span> */}
+    </a>
+  ) : (
+    <button
+      type={type}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      class={buttonClass}
+      style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
+    >
+      <span class={labelClass}>
+        {text}
+        <slot />
+      </span>
+      {/* <span
+        class="relative z-10 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-0.5"
+        aria-hidden="true"
+      >
+        <slot name="icon" />
+      </span> */}
+    </button>
+  )
+}

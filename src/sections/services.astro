@@ -1,0 +1,333 @@
+---
+import salesIcon from "../assets/icons/sales.png";
+import marketingIcon from "../assets/icons/marketing.png";
+import trainingIcon from "../assets/icons/training.png";
+import logisticsIcon from "../assets/icons/logistics.png";
+import regulatoryIcon from "../assets/icons/regulatory.png";
+import corner from "../assets/images/corner-services.png";
+import dots from "../assets/images/dots-services.png";
+import Reveal from "../components/Reveal.astro";
+import salesImage from "../assets/images/sales.png";
+import marketingImage from "../assets/images/marketing.png";
+import trainingImage from "../assets/images/training.png";
+import logisticsImage from "../assets/images/logistics.png";
+import regulatoryImage from "../assets/images/regulatory.png";
+
+const services = [
+  {
+    title: "Sales",
+    description:
+      "Personalized product guidance and attentive follow-up for healthcare professionals.",
+    icon: salesIcon.src,
+    image: salesImage,
+  },
+  {
+    title: "Marketing",
+    description:
+      "Campaigns, design, video, and websites tailored to your practice.",
+    icon: marketingIcon.src,
+    image: marketingImage,
+  },
+  {
+    title: "Training",
+    description: "Hands-on training for safe, effective product use.",
+    icon: trainingIcon.src,
+    image: trainingImage,
+  },
+  {
+    title: "Logistics",
+    description:
+      "Storage, inventory, and reliable delivery, handled with care.",
+    icon: logisticsIcon.src,
+    image: logisticsImage,
+  },
+  {
+    title: "Regulatory",
+    description:
+      "Product registration and compliance support for local markets.",
+    icon: regulatoryIcon.src,
+    image: regulatoryImage,
+  },
+];
+---
+
+<section
+  class="relative w-full overflow-hidden py-20 text-center"
+  aria-labelledby="services-title"
+>
+  <Reveal class="mb-10 px-6 md:px-16" threshold={0.6}>
+    <h2 id="services-title" class="mb-4 text-4xl font-bold">Our Services</h2>
+    <p class="text-xl text-secondary-black">
+      One partner, everything you need.
+    </p>
+  </Reveal>
+
+  <Reveal
+    animation="zoom-in"
+    delay={150}
+    threshold={0.25}
+    class="relative z-10 mx-auto max-w-368 px-6 pb-12 md:px-16"
+  >
+    <div
+      data-services
+      class="services flex justify-center xl:flex-row flex-col items-stretch gap-8 text-start"
+    >
+      <div
+        class="relative grid xl:w-[40%] w-full overflow-hidden items-stretch rounded-3xl bg-primary-orange p-8 text-white shadow-xl md:p-12"
+      >
+        {
+          services.map((service, i) => (
+            <div
+              id={`service-panel-${i}`}
+              role="tabpanel"
+              aria-labelledby={`service-tab-${i}`}
+              data-panel
+              data-active={String(i === 0)}
+              class="panel relative col-start-1 row-start-1 flex flex-col"
+            >
+              <img
+                src={service.image.src}
+                alt=""
+                class="panel-img pointer-events-none absolute -right-20 -top-32 w-72 md:w-96"
+              />
+
+              <div class="mb-auto w-fit rounded-full bg-white p-6">
+                <img
+                  src={service.icon}
+                  alt=""
+                  width="64"
+                  height="64"
+                  class="size-16"
+                />
+              </div>
+
+              <div class="mt-16">
+                <h3 class="mb-3 text-4xl font-bold">{service.title}</h3>
+                <p class="max-w-md text-lg text-white/90">
+                  {service.description}
+                </p>
+
+                <a
+                  href="/services"
+                  class="group mt-8 inline-flex w-fit items-center gap-2 font-semibold text-white underline decoration-2 decoration-white underline-offset-4 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  aria-label={`Explore ${service.title}`}
+                >
+                  Explore more
+                  <svg
+                    class="size-[18px] transition-transform duration-300 ease-out group-hover:translate-x-1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        role="tablist"
+        aria-label="Services"
+        class="grid xl:w-[50%] w-full gap-4 md:grid-cols-2 grid-cols-1"
+      >
+        {
+          services.map((service, i) => (
+            <a href="/services">
+              <button
+                type="button"
+                id={`service-tab-${i}`}
+                role="tab"
+                aria-controls={`service-panel-${i}`}
+                data-tab
+                data-active={String(i === 0)}
+                class:list={[
+                  "tab xl:w-auto md:h-54 w-full group relative flex flex-col overflow-hidden rounded-2xl bg-white p-5 text-start border border-gray-200 outline-none transition-all duration-300 ease-out",
+                  "motion-safe:hover:-translate-y-1 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-orange/50",
+                  // " data-[active=true]:border-primary-orange",
+                  // i === services.length - 1 && "sm:col-span-2",
+                ]}
+              >
+                <img
+                  src={service.image.src}
+                  alt=""
+                  loading="lazy"
+                  class="pointer-events-none absolute -right-8 -top-8 w-32 transition-transform duration-500 group-hover:scale-110"
+                />
+
+                <span class="mb-8 w-fit rounded-full bg-[#fff7f1] p-3 transition-transform duration-500 motion-safe:group-hover:scale-110">
+                  <img
+                    src={service.icon}
+                    alt=""
+                    width="32"
+                    height="32"
+                    loading="lazy"
+                    class="size-8"
+                  />
+                </span>
+
+                <span class="mb-1 block text-xl font-bold">
+                  {service.title}
+                </span>
+                <span class="block text-sm text-secondary-black">
+                  {service.description}
+                </span>
+
+                <span
+                  class="bar absolute inset-x-0 bottom-0 h-1 bg-primary-orange"
+                  aria-hidden="true"
+                />
+              </button>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Reveal>
+
+  <img
+    src={corner.src}
+    alt=""
+    aria-hidden="true"
+    class="deco absolute left-0 top-24 w-[7%]"
+  />
+  <img
+    src={dots.src}
+    alt=""
+    aria-hidden="true"
+    class="deco absolute bottom-8 right-7 w-[7%]"
+  />
+</section>
+
+<style>
+  .services {
+    --duration: 5s;
+  }
+
+  .panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease,
+      visibility 0s linear 0.5s;
+  }
+  .panel[data-active="true"] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 0.5s ease 0.1s,
+      transform 0.5s ease 0.1s,
+      visibility 0s;
+  }
+
+  .panel-img {
+    transform: scale(0.9) rotate(-4deg);
+    transition: transform 0.8s ease;
+  }
+  .panel[data-active="true"] .panel-img {
+    transform: none;
+  }
+
+  .bar {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .tab[data-active="true"] .bar {
+    animation: progress var(--duration) linear forwards;
+  }
+  /* .services:hover .bar,
+    .services:focus-within .bar {
+        animation-play-state: paused;
+    } */
+
+  @keyframes progress {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .deco {
+    pointer-events: none;
+    animation: float 7s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deco {
+      animation: none;
+    }
+    .panel,
+    .panel-img {
+      transition: none;
+    }
+    .bar {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-services]");
+
+  if (root) {
+    const tabs = Array.from(
+      root.querySelectorAll<HTMLButtonElement>("[data-tab]"),
+    );
+    const panels = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-panel]"),
+    );
+    let current = 0;
+
+    const setActive = (index: number) => {
+      if (index === current) return;
+      current = index;
+      tabs.forEach((tab, i) => {
+        tab.dataset.active = String(i === index);
+        tab.setAttribute("aria-selected", String(i === index));
+      });
+      panels.forEach((panel, i) => {
+        panel.dataset.active = String(i === index);
+      });
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("pointerenter", (e) => {
+        if (e.pointerType === "mouse") setActive(i);
+      });
+      tab.addEventListener("click", () => setActive(i));
+      tab.addEventListener("focus", () => setActive(i));
+
+      tab.querySelector(".bar")?.addEventListener("animationend", () => {
+        if (i === current) setActive((i + 1) % tabs.length);
+      });
+
+      tab.addEventListener("keydown", (e) => {
+        const forward = e.key === "ArrowDown" || e.key === "ArrowRight";
+        const backward = e.key === "ArrowUp" || e.key === "ArrowLeft";
+        if (!forward && !backward) return;
+        e.preventDefault();
+        const next = forward
+          ? (i + 1) % tabs.length
+          : (i - 1 + tabs.length) % tabs.length;
+        tabs[next].focus();
+      });
+    });
+  }
+</script>

@@ -1,0 +1,77 @@
+---
+import instagram from '../assets/icons/instagram.png';
+import facebook from '../assets/icons/facebook.png';
+import youtube from '../assets/icons/youtube.png';
+import linkedin from '../assets/icons/linkedin.png';
+import phone from '../assets/icons/phone-white.png';
+import email from '../assets/icons/email-white.png';
+import bioalpha from '../assets/icons/bioalpha-white.png';
+
+const socialLinks = [
+    { name: 'Instagram', icon: instagram.src, url: 'https://www.instagram.com/bioalpha/' },
+    { name: 'Facebook', icon: facebook.src, url: 'https://www.facebook.com/bioalpha/' },
+    { name: 'YouTube', icon: youtube.src, url: 'https://www.youtube.com/@bioalpha' },
+    { name: 'LinkedIn', icon: linkedin.src, url: 'https://www.linkedin.com/company/bioalpha/' },
+    { name: 'phone', icon: phone.src, url: 'https://www.linkedin.com/company/bioalpha/' },
+    { name: 'email', icon: email.src, url: 'https://www.linkedin.com/company/bioalpha/' },
+];
+
+const links = [
+    { name: 'Products', url: '/products' },
+    { name: 'About', url: '/about' },
+    { name: 'Contact', url: '/contact' },
+];
+const products = [
+    { name: 'AestheFill', url: '/products/aesthefill' },
+    { name: 'PowerFill', url: '/products/powerfill' },
+    { name: 'Juvegel', url: '/products/juvegel' },
+];
+const legalLinks = [
+    { name: 'Privacy Policy', url: '/privacy-policy' },
+    { name: 'Terms of Service', url: '/terms-of-service' }
+];
+---
+
+
+
+<footer class="w-full bg-primary-black z-50">
+    <div class="flex max-w-368 m-auto flex-wrap py-18 md:px-24 px-8  justify-around xl:flex-row flex-col xl:gap-0 gap-12">
+    <div>
+        <a class="w-fit" href="/">
+        <img src={bioalpha.src} alt="Bio Alpha" class="w-32 transition-all hover:scale-105 mb-4" />
+        </a>
+        <p class="text-offwhite my-8 font-medium opacity-80">We are a medical aesthetics company.</p>
+
+        <div class="flex gap-6 shrink-0 flex-wrap">
+            {socialLinks.map((link) => (
+                    <a href={link.url} target="_blank" class="w-fit h-fit transition-all hover:scale-110" rel="noopener noreferrer">
+
+                <div class=" p-3 rounded-full h-12 w-12 flex justify-center items-center bg-[#252221]">
+                        <img src={link.icon} class="w-full h-auto"  alt={link.name} />
+                </div>
+                    </a>
+
+            ))}
+        </div>
+    </div>
+    <div class="flex flex-col gap-4 w-fit ">
+        <h3 class="text-offwhite font-bold text-lg mb-4">Quick Links</h3>
+        {links.map((link) => (
+            <a href={link.url} class="text-offwhite font-medium opacity-80 hover:opacity-100 transition-opacity duration-300">{link.name}</a>
+        ))}
+    </div>
+    <div class="flex flex-col w-fit gap-4 ">
+        <h3 class="text-offwhite font-bold text-lg mb-4">Products</h3>
+        {products.map((product) => (
+            <a href={product.url} class="text-offwhite font-medium opacity-80 hover:opacity-100 transition-opacity duration-300">{product.name}</a>
+        ))}
+    
+    </div>
+    <div class="flex flex-col w-fit gap-4 ">
+        <h3 class="text-offwhite font-bold text-lg mb-4">Legal</h3>
+        {legalLinks.map((link) => (
+            <a href={link.url} class="text-offwhite font-medium opacity-80 hover:opacity-100 transition-opacity duration-300">{link.name}</a>
+        ))}
+    </div>
+    </div>
+</footer>

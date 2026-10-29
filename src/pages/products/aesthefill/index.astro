@@ -1,0 +1,242 @@
+---
+import bg from "../../../assets/images/aesthefill-bg.png";
+import documentIcon from "../../../assets/icons/document-white.png";
+import Layout from "../../../layouts/Layout.astro";
+import brochure from "../../../assets/brochures/AestheFill Brochure.pdf";
+import AppButton from "../../../components/AppButton.astro";
+import ProductSpecs from "../../../components/ProductSpecs.astro";
+import safeZones from "../../../assets/images/aesthefill-safe.png";
+import dangerZones from "../../../assets/images/aesthefill-danger.png";
+import dangerIcon from "../../../assets/icons/danger.svg";
+import checkIcon from "../../../assets/icons/check.svg";
+import before1 from "../../../assets/images/b&a/aesthefill-before-1.png";
+import after1 from "../../../assets/images/b&a/aesthefill-after-1.png";
+import before2 from "../../../assets/images/b&a/aesthefill-before-2.png";
+import after2 from "../../../assets/images/b&a/aesthefill-after-2.png";
+import before3 from "../../../assets/images/b&a/aesthefill-before-3.png";
+import after3 from "../../../assets/images/b&a/aesthefill-after-3.png";
+import logo from "../../../assets/images/aesthefill-logo.png";
+import ZoomImage from "../../../components/ZoomImage.astro";
+import BeforeAfterSlider from "../../../components/BeforeAfterSlider.astro";
+
+const productSpecs = [
+  { name: "Product Type", value: "Injectable filler / collagen stimulator" },
+  { name: "Vial Strength", value: "200mg" },
+  { name: "Duration", value: "Up to 24 months" },
+  { name: "Treatment Frequency", value: "1 - 2 sessions" },
+  { name: "Key Component", value: "PDLLA (Poly-D,L-Lactic Acid)" },
+  { name: "Manufacturer", value: "REGEN Biotech, Inc." },
+];
+
+const results = [
+  { before: before1, after: after1 },
+  { before: before2, after: after2 },
+  { before: before3, after: after3 },
+];
+---
+
+<Layout title="AestheFill | Bio Alpha" navColor="aesthefill">
+  <div class="w-full">
+    <div class="w-full flex lg:flex-row flex-col-reverse justify-between">
+      <div
+        class="px-[5vw] lg:mt-12 py-24 max-w-3xl text-xl animate-hero-delayed"
+      >
+        <div class="">
+          <!-- <Breadcrumb items={[
+        { label: "Home", href: "/" },
+        { label: "Products", href: "/products" },
+        { label: "AestheFill" },
+    ]} /> -->
+        </div>
+        <!-- <h1 class="font-bold text-5xl text-aesthefill">AestheFill</h1> -->
+        <img src={logo.src} class="w-72" alt="AestheFill logo" />
+        <p class="mt-4 mb-10 text">
+          AestheFill® is an injectable collagen biostimulator developed by REGEN
+          Biotech, formulated with biocompatible, biodegradable poly-D, L-lactic
+          acid (PDLLA) microspheres. Designed to support facial rejuvenation by
+          stimulating natural collagen production to help address age-related
+          volume loss, wrinkles, and folds. Its biodegradable PDLLA porous
+          microsphere’s structure encourages gradual tissue renewal, helping
+          restore facial fullness and progressively improve skin quality over
+          time.
+        </p>
+        <div class="flex gap-5">
+          <AppButton
+            text="Download Brochure"
+            height="h-16"
+            bgColor="bg-aesthefill"
+            width="w-64"
+            href={brochure}
+            download={true}
+            ><icon>
+              <img
+                class="w-6 inline mx-2"
+                src={documentIcon.src}
+                alt="Document Icon"
+              /></icon
+            ></AppButton
+          >
+          <AppButton
+            text="Contact Us"
+            height="h-16"
+            bgColor="bg-white"
+            textColor="text-aesthefill"
+            border={true}
+            width="w-64"
+            href="/contact"
+          />
+        </div>
+      </div>
+
+      <img
+        src={bg.src}
+        class="lg:w-[40%] w-full slide-right-left"
+        alt="Aesthefill Background"
+        class="h-auto max-h-125"
+      />
+    </div>
+    <div class="w-full lg:max-w-7xl m-auto px-8">
+      <div class="w-full lg:px-0 mb-12 m-auto">
+        <ProductSpecs specs={productSpecs} color={"aesthefill"} />
+      </div>
+      <div
+        class="w-full m-auto bg-white border border-aesthefill rounded-2xl p-8 mb-12"
+      >
+        <h2 class="font-bold text-3xl text-aesthefill mb-4">Injection zones</h2>
+        <h3 class="text-green-600 font-bold mb-3">
+          <img
+            src={checkIcon.src}
+            class="w-8 inline mr-2"
+            alt="check icon"
+          />Safe zones:
+          <span class="text-primary-black mx-1">
+            malar, nasolabial fold, temporal fossa, cheek.</span
+          >
+        </h3>
+        <h3 class="text-red-600 font-bold mb-8">
+          <img
+            src={dangerIcon.src}
+            class="w-8 inline mr-2"
+            alt="danger icon"
+          />Danger zones:
+          <span class="text-primary-black mx-1">
+            eye trough, forehead, nasal dorsum, chin, neck.</span
+          >
+        </h3>
+        <div class="flex justify-around flex-wrap gap-y-4">
+          <ZoomImage
+            src={safeZones.src}
+            class="w-104 rounded-2xl"
+            alt="aesthefill safe zones"
+          />
+          <ZoomImage
+            src={dangerZones.src}
+            class="w-104 rounded-2xl"
+            alt="aesthefill danger zones"
+          />
+        </div>
+      </div>
+
+      <div
+        class="w-full m-auto bg-white border border-aesthefill rounded-2xl p-8 mb-12"
+      >
+        <h2 class="font-bold text-3xl text-aesthefill mb-8">Results</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            results.map((result, i) => (
+              <BeforeAfterSlider
+                before={result.before}
+                color={"aesthefill"}
+                after={result.after}
+                alt={`AestheFill result, example ${i + 1}`}
+              />
+            ))
+          }
+        </div>
+      </div>
+
+      <div
+        class="w-full m-auto bg-white border border-aesthefill rounded-2xl p-8 mb-12 flex
+    items-center justify-between md:flex-row flex-col-reverse md:gap-0 gap-4"
+      >
+        <div>
+          <p class="font-bold text-xl text-center text-aesthefill">
+            Download brochure to view full product details
+          </p>
+          <div class="md:h-14"></div>
+
+          <AppButton
+            bgColor="bg-aesthefill"
+            text="Download"
+            className="mt-4 m-auto md:m-0"
+            width="w-54"
+            href={brochure}
+            download={true}
+          />
+        </div>
+        <svg
+          version="1.1"
+          class={`fill-aesthefill size-44`}
+          id="_x32_"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 512 512"
+          xml:space="preserve"
+          fill="#000000"
+          ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+            <style type="text/css"></style>
+            <g>
+              <path
+                class="st0"
+                d="M378.41,0H208.294h-13.176l-9.314,9.314L57.017,138.102l-9.315,9.314v13.176v265.513 c0,47.361,38.528,85.896,85.896,85.896H378.41c47.36,0,85.888-38.535,85.888-85.896V85.895C464.298,38.528,425.77,0,378.41,0z M432.494,426.104c0,29.877-24.214,54.092-54.084,54.092H133.598c-29.877,0-54.091-24.215-54.091-54.092V160.591h83.717 c24.884,0,45.07-20.179,45.07-45.07V31.804H378.41c29.87,0,54.084,24.214,54.084,54.091V426.104z"
+              ></path>
+              <rect x="277.446" y="93.17" class="st0" height="89.373"></rect>
+              <rect
+                x="145.175"
+                y="232.592"
+                class="st0"
+                width="221.644"
+                height="25.024"></rect>
+              <rect
+                x="145.175"
+                y="304.09"
+                class="st0"
+                width="221.644"
+                height="25.024"></rect>
+              <rect
+                x="145.175"
+                y="375.588"
+                class="st0"
+                width="221.644"
+                height="25.024"></rect>
+            </g>
+          </g></svg
+        >
+      </div>
+
+      <div
+        class="w-full m-auto bg-primary-black rounded-2xl p-8 mb-12 flex
+    items-center justify-between md:flex-row flex-col md:gap-0 gap-4"
+      >
+        <div>
+          <h1 class="mb-2 text-3xl font-bold text-bg">
+            Want to learn more about AestheFill?
+          </h1>
+          <p class="text-bg opacity-80">
+            We're here to provide help at any time
+          </p>
+        </div>
+        <AppButton
+          text="Contact us"
+          href="/contact"
+          textColor="text-primary-black"
+          bgColor="bg-primary-orange"
+        />
+      </div>
+    </div>
+  </div>
+</Layout>

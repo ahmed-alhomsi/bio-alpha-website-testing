@@ -1,0 +1,79 @@
+---
+import Reveal from "../components/Reveal.astro";
+import  Layout  from "../layouts/Layout.astro";
+
+import salesIcon from '../assets/icons/sales.png';
+import marketingIcon from '../assets/icons/marketing.png';
+import trainingIcon from '../assets/icons/training.png';
+import logisticsIcon from '../assets/icons/logistics.png';
+import regulatoryIcon from '../assets/icons/regulatory.png';
+// import corner from '../assets/images/corner-services.png';
+import salesImage from '../assets/images/sales.png';
+import marketingImage from '../assets/images/marketing.png';
+import trainingImage from '../assets/images/training.png';
+import logisticsImage from '../assets/images/logistics.jpg';
+import regulatoryImage from '../assets/images/regulatory.jpg';
+import AppButton from "../components/AppButton.astro";
+const services = [
+    { title: "Sales", description: "Reliable supply and dedicated account support for clinics and distributors.", icon: salesIcon.src, image: salesImage },
+    { title: "Marketing", description: "Comprehensive marketing support to help you grow your business.", icon: marketingIcon.src, image: marketingImage },
+    { title: "Training", description: "Expert training for practitioners to ensure safe and effective use of our products.", icon: trainingIcon.src, image: trainingImage },
+    { title: "Logistics", description: "Efficient logistics and distribution to ensure timely delivery.", icon: logisticsIcon.src, image: logisticsImage },
+    { title: "Regulatory", description: "Regulatory support to help you navigate complex compliance requirements.", icon: regulatoryIcon.src, image: regulatoryImage },
+];
+
+---
+
+
+<Layout title="Services | Bio Alpha">
+  <div class="w-full lg:mt-12 mb-12 pt-24 max-w-368 m-auto text-center">
+     
+                    <Reveal delay={150}>
+                        <h1 class="text-primary-black font-bold text-5xl">Our <span class="text-primary-orange"> Services </span></h1>
+                    </Reveal>
+                    <Reveal delay={300}>
+                        <p class="text-secondary-black mt-4 text-lg mb-12">One partner, everything you need.</p>
+                    </Reveal>
+
+                    {services.map((service,ind)=>{
+                        const alter=ind%2==0;
+                   return (
+                   <Reveal animation="fade-right" threshold={0.30}>
+                   <div class={`relative min-h-72 shadow-md group transition-all duration-500 hover:-translate-y-2 hover:bg-primary-orange  p-12 mb-12 flex ${alter? "bg-orange-off ": "bg-primary-black"} md:flex-row flex-col  md:rounded-3xl rounded-none lg:w-[70%] w-full m-auto overflow-hidden`}`>
+                        <img src={service.image.src} class="md:absolute w-72 md:mb-0 mb-4 top-0 transition-all duration-500 group-hover:scale-105 -right-12 " alt={service.title}/>
+                      {/* <div class="mb-auto w-fit rounded-full bg-white p-6">
+                            <img src={service.icon} alt="" width="64" height="64" class="size-16" />
+                            
+                        </div> */}
+                        <div class=" text-start">
+                            <h3 class={`mb-3 transition-all group-hover:translate-x-2 duration-500 text-4xl font-bold ${alter? "text-primary-black": "text-white"}`}>{service.title}</h3>
+                            <p class={`max-w-md text-lg ${alter? "text-primary-black": "text-white"}`}>{service.description}</p>
+
+                            {/* <a
+                                href="#"
+                                class="group mt-8 inline-flex w-fit items-center gap-2 font-semibold text-primary-orange underline decoration-2 decoration-primary-orange underline-offset-4 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                                aria-label={`Explore ${service.title}`}
+                            >
+                                Explore more
+                                <svg
+                                    class="size-[18px] transition-transform duration-300 ease-out group-hover:translate-x-1.5"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                >
+                                    <path d="M5 12h14M13 6l6 6-6 6" />
+                                </svg>
+                            </a> */}
+                        </div>
+                        
+                        
+                    </div>
+                    </Reveal>
+                    )}
+                    )}
+
+                    <AppButton textSize="text-lg" className="mt-12 m-auto" width="w-64" href="/contact" text="Contact us" textColor="text-primary-black" height="h-18" bgColor="bg-primary-orange"/>
+
+                    
+      
+                </div>
+
+</Layout>
